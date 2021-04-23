@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Cafe | Contact Us</title>
+<meta name="description" content="">
+
+<!-- core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link href="../css/prettyPhoto.css" rel="stylesheet">
+<link href="../css/main.css" rel="stylesheet">
+<link href="../css/responsive.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!--/head-->
+
+<body>
+<header id="header">
+  <nav class="navbar navbar-inverse" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="/"><i class="fa fa-bolt"></i> Gaming Cafe</a></a> </div>
+      <div class="collapse navbar-collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="about-us">About</a></li>
+          <li><a href="menu">Menu</a></li>
+          <li class = "active"><a href="reservation">Make a Reservation</a></li>
+          <li><a href="pricing">Prices</a></li>
+          <li><a href="contact-us">Contact</a></li>
+          <li><a href="login">Login</a></li>
+        </ul>
+      </div>
+      {{#if session.user}}
+        <div>{{session.user.username}}</div>
+      {{/if}}
+    </div>
+    <!--/.container--> 
+  </nav>
+  <!--/nav--> 
+  
+</header>
+<div class="color-border"> </div>
+<section id="inner-page">
+  <div class="container">
+    <div class="center">
+      <h2>Make a Reservation</h2>
+      <p class="lead">Tables are going fast act quickly to reserve a table for you and your friends and choose which games you want to book.</p>
+    </div>
+    <ul class="portfolio-filter text-center">
+      <h2> Select your reservation needs</h2>
+      <li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
+      <li><a class="btn btn-default" href="#" data-filter=".web">Single Booking</a></li>
+      <li><a class="btn btn-default" href="#" data-filter=".apps">Group Booking</a></li>
+      <li><a class="btn btn-default" href="#" data-filter=".branding">Event Booking</a></li>
+    </ul>
+<!--/header-->
+
+
+
+    <div class="center">
+     
+      <p class="lead">Fill out the form to book your reservation</p>
+    </div>
+    <div class="row">
+      <form id="main-reservation-form" class="contact-form" name="contact-form" method="POST" action="/reservation">
+        <div class="col-sm-5 col-sm-offset-1">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" name="name" class="form-control" required id="name">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" class="form-control" required id="email">
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" class="form-control" id="phone" placeholder="###-###-#### format" required>
+          </div>
+          <div class="form-group">
+            <label>Booking Date/Time *</label>
+            <input type="datetime-local" class="form-control" id="date" name="bookFor" required>
+            <div class="form__input-error-message">{{message}}</div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label>How many People *</label>
+            <input type="number" min="0" name="subject" class="form-control" required id="people" name="custCount">
+          </div>
+          <div class="col-sm-5">
+            <label>Choose a Cafe</label>
+            <select id="location" name="location" required>
+              <option value="Cafe 1, streetname, ON, A1B 2C3">Cafe 1, streetname, ON, A1B 2C3</option>
+              <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, roadname, ON, D4E 5F6</option>
+              <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, avenuename, ON, G7H 8I9</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Additional Notes</label>
+            <textarea name="message" id="message" name="note" class="form-control" rows="8"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit Booking</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!--/.row--> 
+  </div>
+  <!--/.container--> 
+  <br>
+  <br>
+</section>
+<!--/#inner-page-->
+
+<div class="color-border"> </div>
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">Copyright &copy; 2021 Gaming Cafe. Design by <a href="http://www.templategarden.com" rel="nofollow">TemplateGarden</a></div>
+      <div class="col-sm-6">
+        <div class="follow-us"> <a class="fa fa-facebook social-icon" href="#"></a> <a class="fa fa-twitter social-icon" href="#"></a> <a class="fa fa-linkedin social-icon" href="#"></a> <a class="fa fa-google-plus social-icon" href="#"></a> </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--/#footer--> 
+
+<script src="../js/jquery.js"></script> 
+<script src="../js/bootstrap.min.js"></script> 
+<script src="../js/jquery.prettyPhoto.js"></script> 
+<script src="../js/jquery.isotope.min.js"></script> 
+<script src="../js/main.js"></script>
+<script src="../app.js"></script>
+
+<script>
+
+ var name = document.getElementById('name').value; 
+const reservation = document.getElementById("main-reservation-form");
+reservation.addEventListener("submit", (e) => { 
+console.log("reservation submitted");
+
+const request = new XMLHttpRequest();
+request.open("post","reservation.php");
+request.onload = function (){
+  console.log(request.responseText);
+}
+request.send(new FormData(reservation));
+});
+
+</script>
+</body>
+</html>
