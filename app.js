@@ -276,30 +276,6 @@ app.post("/signup", (req, res) => {
             });
         });
     };  // END OF SIGNUP FUNCTIONITLY (SAVING NEW USER)
-
-    // UserData.find({
-    //     username: req.body.username
-    // }).exec()
-    // .then(result => {
-    //     console.log(`Users that match Username: ${result}`);
-    //     if(result) {
-    //         res.render('signup', {userMessage: "Username Taken", emailMessage: ""});
-    //     }
-    //     else {
-    //         UserData.find({
-    //             email: req.body.email
-    //         }).exec()
-    //         .then(rez => {
-    //             console.log(`Users that match Email: ${rez}`);
-    //             if (rez) {
-    //                 res.render('signup', {userMessage: "", emailMessage: "Email already used"});
-    //             }
-    //             else {
-                    
-    //             };
-    //         }); 
-    //     };
-    // });
 });
 
 // Catch all for incorrect path names
