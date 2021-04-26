@@ -71,19 +71,19 @@ let loginLink = "login";
 // Gets the index.html from server and loads it to browser
 app.get("/", ensureLogin, (req, res) => {
     if (req.session.user) {
-        console.log(true);
+        //console.log(true);
         loginUser = req.session.user.username;
         loginLink = "#";
 
-        console.log(`User: ${loginUser} - Link: ${loginLink}`);
+        //console.log(`User: ${loginUser} - Link: ${loginLink}`);
     }
     else {
-        console.log(false);
+        //console.log(false);
 
         loginUser = "Login";
         loginLink = "login";
 
-        console.log(`User: ${loginUser} - Link: ${loginLink}`);
+        //console.log(`User: ${loginUser} - Link: ${loginLink}`);
     }
     res.render('index', {loginUser: loginUser, loginLink: loginLink});
 });
@@ -231,6 +231,11 @@ app.post('/login', (req, res) => {
         errMsg = "Username Incorrect";
         res.render('login', {message: errMsg}); // Reload page with error message displayed
     })
+});
+
+app.get('/logout', (req, res) => {
+    req.session.reset();
+    res.redirect("/");
 });
 
 // Gets the signup.html from server and loads it to browser
