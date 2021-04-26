@@ -36,7 +36,7 @@
           <li><a href="pricing">Prices</a></li>
           <li><a href="contact-us">Contact</a></li>
         {{#if session.user}}
-          <li><div>{{session.user.username}}</div></li>
+          <li><a href="#">{{session.user.username}}</a></li>
         {{#else}}
           <li><a href="login">Login</a></li>
         {{/if}}

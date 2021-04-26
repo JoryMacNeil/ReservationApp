@@ -67,6 +67,7 @@ let ensureLogin = (req, res, next) => {
 
 // Gets the index.html from server and loads it to browser
 app.get("/", ensureLogin, (req, res) => {
+    console.log(req.session.user);
     res.render('index');
 });
 
@@ -206,7 +207,7 @@ app.post('/login', (req, res) => {
                         email: userdatas.email
                     }
 
-                    console.log(req.session.user);
+                    //console.log(req.session.user);
 
                     res.redirect('/');  // Send user to the main page
                 }
