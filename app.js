@@ -65,10 +65,27 @@ let ensureLogin = (req, res, next) => {
     }
 }
 
+let loginUser = "Login";
+let loginLink = "login";
+
 // Gets the index.html from server and loads it to browser
 app.get("/", ensureLogin, (req, res) => {
-    console.log(req.session.user);
-    res.render('index');
+    if (req.session.user) {
+        console.log(true);
+        loginUser = req.session.user.username;
+        loginLink = "#";
+
+        console.log(`User: ${loginUser} - Link: ${loginLink}`);
+    }
+    else {
+        console.log(false);
+
+        loginUser = "Login";
+        loginLink = "login";
+
+        console.log(`User: ${loginUser} - Link: ${loginLink}`);
+    }
+    res.render('index', {loginUser: loginUser, loginLink: loginLink});
 });
 
 // Gets the about-us.html from server and loads it to browser
@@ -157,11 +174,6 @@ app.get("/display", (req, res) => {
     //console.log(`ID param: ${id}`);
     res.render("display");  // Render display page
 });
-// app.get("/display/:id", (req, res) => {
-//     const id = req.params.id;   // Saves id params
-//     //console.log(`ID param: ${id}`);
-//     res.render("display");  // Render display page
-// });
 
 // Gets the pricing.html from server and loads it to browser
 app.get("/pricing", (req, res) => {

@@ -35,11 +35,7 @@
           <li class = "active"><a href="reservation">Make a Reservation</a></li>
           <li><a href="pricing">Prices</a></li>
           <li><a href="contact-us">Contact</a></li>
-        {{#if session.user}}
-          <li><a href="#">{{session.user.username}}</a></li>
-        {{#else}}
           <li><a href="login">Login</a></li>
-        {{/if}}
         </ul>
       </div>
     </div>
