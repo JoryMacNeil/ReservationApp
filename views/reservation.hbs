@@ -93,7 +93,7 @@
           <div class="form-group">
             <label>Booking Date/Time *</label>
             <input type="datetime-local" class="form-control" id="date" name="bookFor" required>
-            <div class="form__input-error-message"></div>
+            <div class="form__input-error-message">{{datetimeErr}}</div>
           </div>
           <div class="col-sm-5">
             <div class="form-group">
@@ -103,7 +103,7 @@
                 <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, roadname, ON, D4E 5F6</option>
                 <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, avenuename, ON, G7H 8I9</option>
               </select>
-              <div class="form__input-error-message">{{message}}</div>
+              <div class="form__input-error-message"></div>
             </div>
           </div>
         </div>
