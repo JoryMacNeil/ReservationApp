@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.schema; // Create variable to sub
 
 // Create a schema for how the data should be held in the database
 const userSchema = new mongoose.Schema({

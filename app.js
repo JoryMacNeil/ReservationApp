@@ -178,13 +178,13 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => { 
     // Find user existing user using username
-    UserData.findOne({
+    UserData.find({
         username: req.body.username
     }).exec()
     .then((userdatas) => {
         if(userdatas) { // If userdatas is not empty
             // Compare encrypted password with password inputted by user
-            bcrypt.compare(req.body.password, userdatas.password)
+            bcrypt.compare(req.body.password, userdatas[0].password)
             .then((result) => {
                 if (result == false) {  // Check if the passwords are differend
                     res.render('login', {passwordErr: "Password Incorrect"}); // Reload login page with error message displayed
@@ -192,9 +192,9 @@ app.post('/login', (req, res) => {
                 else {
                     // Returns user's username, email, and type to the session
                     req.session.user = {
-                        username: userdatas.username,
-                        email: userdatas.email,
-                        userType: userdatas.userType
+                        username: userdatas[0].username,
+                        email: userdatas[0].email,
+                        userType: userdatas[0].userType
                     }
 
                     res.redirect('/');  // Send user to the main page
@@ -208,7 +208,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    res.session.reset();
+    req.session.reset();
     res.redirect("/");
 });
 
