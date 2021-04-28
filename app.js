@@ -66,33 +66,33 @@ let ensureLogin = (req, res, next) => {
 }
 
 // Gets the index.html from server and loads it to browser
-app.get("/", (req, res) => {
+app.get("/", ensureLogin, (req, res) => {
     res.render('index');
 });
 
 
 // Gets the about-us.html from server and loads it to browser
-app.get("/about-us", (req, res) => {
+app.get("/about-us", ensureLogin, (req, res) => {
     res.render('about-us');
 });
 
 // redirects path to about-us path
-app.get("/about", (req, res) => {
+app.get("/about", ensureLogin, (req, res) => {
     res.redirect('/about-us');
 });
 
 // Gets the menu.html from server and loads it to browser
-app.get("/menu", (req, res) => {
+app.get("/menu", ensureLogin, (req, res) => {
     res.render('menu');
 });
 
 //Gets staffReservation
-app.get("/staff", (req, res) => {
+app.get("/staff", ensureLogin, (req, res) => {
     res.render('staff');
 });
 
 // Gets the reservation.html from server and loads it to browser
-app.get("/reservation", (req, res) => {
+app.get("/reservation", ensureLogin, (req, res) => {
     res.render('reservation');
 });
 
@@ -156,29 +156,24 @@ app.post("/reservation", ensureLogin, (req, res) => {
 });
 
 // Gets display and pass id params
-app.get("/display", (req, res) => {
+app.get("/display", ensureLogin, (req, res) => {
     const id = req.params.id;   // Saves id params
     //console.log(`ID param: ${id}`);
     res.render("display");  // Render display page
 });
-// app.get("/display/:id", (req, res) => {
-//     const id = req.params.id;   // Saves id params
-//     //console.log(`ID param: ${id}`);
-//     res.render("display");  // Render display page
-// });
 
 // Gets the pricing.html from server and loads it to browser
-app.get("/pricing", (req, res) => {
+app.get("/pricing", ensureLogin, (req, res) => {
     res.render('pricing');
 });
 
 // Gets the contact-us.html from server and loads it to browser
-app.get("/contact-us", (req, res) => {
+app.get("/contact-us", ensureLogin, (req, res) => {
     res.render('contact-us');
 });
 
 // redirect path to /contact-us 
-app.get("/contact", (req, res) => {
+app.get("/contact", ensureLogin, (req, res) => {
     res.redirect('/contact-us');
 });
 
