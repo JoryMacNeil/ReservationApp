@@ -151,7 +151,7 @@ body > section {
 	background-color: #3498db;
 	color: #fff;
 }
-.navbar-inverse .navbar-nav > li > .dropdown {
+.navbar-inverse .navbar-nav > li > div.dropdown {
 	padding: 5px 12px;
 	margin: 0;
 	border-radius: 3px;
@@ -159,7 +159,7 @@ body > section {
 	line-height: 24px;
 	display: inline-block;
 }
-.navbar-inverse .navbar-nav > li > .dropdown > .dropdown-content{
+.navbar-inverse .navbar-nav > li > div.dropdown > div.dropdown-content{
 	padding: 5px 12px;
 	margin: 0;
 	border-radius: 3px;
@@ -167,10 +167,10 @@ body > section {
 	line-height: 24px;
 	display: none;
 }
-.navbar-inverse .navbar-nav > li > .dropdown:hover > .dropdown-content{
+.navbar-inverse .navbar-nav > li > div.dropdown:hover > div.dropdown-content{
 	display: block;
 }
-.navbar-inverse .navbar-nav > li > .dropdown > .dropdown-content:hover {
+.navbar-inverse .navbar-nav > li > div.dropdown > div.dropdown-content:hover {
 	background-color: #3498db;
 	color: #fff;
 }
