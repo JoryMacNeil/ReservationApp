@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true   // Must Require a Password
+    },
+    userType: {
+        type: String,
+        require: true
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
 

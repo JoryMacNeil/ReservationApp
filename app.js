@@ -93,8 +93,7 @@ app.get("/staff", (req, res) => {
 
 // Gets the reservation.html from server and loads it to browser
 app.get("/reservation", (req, res) => {
-    errMsg = "";
-    res.render('reservation', {message: errMsg});
+    res.render('reservation');
 });
 
 app.post("/reservation", ensureLogin, (req, res) => {
@@ -206,10 +205,11 @@ app.post('/login', (req, res) => {
                 else {
                     errMsg = "";    // Remove error message
 
-                    // Returns user's username and email to the session
+                    // Returns user's username, email, and type to the session
                     req.session.user = {
                         username: userdatas.username,
-                        email: userdatas.email
+                        email: userdatas.email,
+                        userType: userdatas.userType
                     }
 
                     res.redirect('/');  // Send user to the main page
@@ -253,8 +253,8 @@ app.post("/signup", (req, res) => {
                     let newUser = new UserData({
                         username: req.body.username,
                         email: req.body.email,
-                        password: hash
-                        
+                        password: hash,
+                        userType: "customer"
                     });
 
                     // Attempts to save user into DB
@@ -282,30 +282,6 @@ app.post("/signup", (req, res) => {
             });
         });
     };  // END OF SIGNUP FUNCTIONITLY (SAVING NEW USER)
-
-    // UserData.find({
-    //     username: req.body.username
-    // }).exec()
-    // .then(result => {
-    //     console.log(`Users that match Username: ${result}`);
-    //     if(result) {
-    //         res.render('signup', {userMessage: "Username Taken", emailMessage: ""});
-    //     }
-    //     else {
-    //         UserData.find({
-    //             email: req.body.email
-    //         }).exec()
-    //         .then(rez => {
-    //             console.log(`Users that match Email: ${rez}`);
-    //             if (rez) {
-    //                 res.render('signup', {userMessage: "", emailMessage: "Email already used"});
-    //             }
-    //             else {
-                    
-    //             };
-    //         }); 
-    //     };
-    // });
 });
 
 // Catch all for incorrect path names
