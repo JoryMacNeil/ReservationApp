@@ -23,8 +23,6 @@ const express = require("express");
 // Create express app
 const app = express();
 
-let errMsg = "";
-
 // Create new view engine
  app.engine('.hbs', exphbs({
      extname: '.hbs',
@@ -100,11 +98,10 @@ app.post("/reservation", ensureLogin, (req, res) => {
     let today = new Date(); // Gets todays date and time
 
     if (req.body.bookFor <= today) {    // Check if the date and time is today or in the past
-        errMsg = "Date and time unavailable";   // Change error message
-        res.render("reservation", {message: errMsg});   // Reloads page with error message displayed
+        res.render("reservation", {dateTimeErr: "Date and time unavailable"});   // Reloads page with error message displayed
     } 
     else {
-        console.log(req.body.location);
+        //console.log(req.body.location);
         
         // Make new Reservation object
         let newReserv = new reservData({
@@ -118,7 +115,7 @@ app.post("/reservation", ensureLogin, (req, res) => {
             note: req.body.note
         });
 
-        console.log(newReserv);
+        //console.log(newReserv);
         
         // Attempts to save object into database
         newReserv.save((err) => {
@@ -149,7 +146,6 @@ app.post("/reservation", ensureLogin, (req, res) => {
             if(reservs) {
                 //console.log(reservs);
                 res.redirect(`/display`);
-                //res.redirect(`/display/${reservs[0]._id}`); // Redirect the user to display page using ID
             }
         })
     }
@@ -157,8 +153,6 @@ app.post("/reservation", ensureLogin, (req, res) => {
 
 // Gets display and pass id params
 app.get("/display", ensureLogin, (req, res) => {
-    const id = req.params.id;   // Saves id params
-    //console.log(`ID param: ${id}`);
     res.render("display");  // Render display page
 });
 
@@ -179,8 +173,7 @@ app.get("/contact", ensureLogin, (req, res) => {
 
 // Gets the login.html from server and loads it to browser
 app.get('/login', (req, res) => {
-    errMsg = "";
-    res.render('login', {message: errMsg});
+    res.render('login');
 });
 
 app.post('/login', (req, res) => { 
@@ -194,12 +187,9 @@ app.post('/login', (req, res) => {
             bcrypt.compare(req.body.password, userdatas.password)
             .then((result) => {
                 if (result == false) {  // Check if the passwords are differend
-                    errMsg = "Password Incorrect";  // Set message to be display password is incorrect
-                    res.render('login', {message: errMsg}); // Reload login page with error message displayed
+                    res.render('login', {passwordErr: "Password Incorrect"}); // Reload login page with error message displayed
                 }
                 else {
-                    errMsg = "";    // Remove error message
-
                     // Returns user's username, email, and type to the session
                     req.session.user = {
                         username: userdatas.username,
@@ -213,10 +203,13 @@ app.post('/login', (req, res) => {
         }
     })
     .catch((err) => {
-        // Set error message
-        errMsg = "Username Incorrect";
-        res.render('login', {message: errMsg}); // Reload page with error message displayed
+        res.render('login', {usernameErr: "Username Incorrect"}); // Reload page with error message displayed
     })
+});
+
+app.get('/logout', (req, res) => {
+    res.session.reset();
+    res.redirect("/");
 });
 
 // Gets the signup.html from server and loads it to browser
