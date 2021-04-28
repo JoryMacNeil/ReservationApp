@@ -23,6 +23,8 @@ const express = require("express");
 // Create express app
 const app = express();
 
+let errMsg = "";
+
 // Create new view engine
  app.engine('.hbs', exphbs({
      extname: '.hbs',
@@ -63,28 +65,11 @@ let ensureLogin = (req, res, next) => {
     }
 }
 
-let loginUser = "Login";
-let loginLink = "login";
-
 // Gets the index.html from server and loads it to browser
-app.get("/", ensureLogin, (req, res) => {
-    if (req.session.user) {
-        //console.log(true);
-        loginUser = req.session.user.username;
-        loginLink = "#";
-
-        //console.log(`User: ${loginUser} - Link: ${loginLink}`);
-    }
-    else {
-        //console.log(false);
-
-        loginUser = "Login";
-        loginLink = "login";
-
-        //console.log(`User: ${loginUser} - Link: ${loginLink}`);
-    }
-    res.render('index', {loginUser: loginUser, loginLink: loginLink});
+app.get("/", (req, res) => {
+    res.render('index');
 });
+
 
 // Gets the about-us.html from server and loads it to browser
 app.get("/about-us", (req, res) => {
@@ -101,19 +86,26 @@ app.get("/menu", (req, res) => {
     res.render('menu');
 });
 
+//Gets staffReservation
+app.get("/staff", (req, res) => {
+    res.render('staff');
+});
+
 // Gets the reservation.html from server and loads it to browser
 app.get("/reservation", (req, res) => {
-    res.render('reservation');
+    errMsg = "";
+    res.render('reservation', {message: errMsg});
 });
 
 app.post("/reservation", ensureLogin, (req, res) => {
     let today = new Date(); // Gets todays date and time
 
     if (req.body.bookFor <= today) {    // Check if the date and time is today or in the past
-        res.render("reservation", {datetimeErr: "Date and time unavailable"});   // Reloads page with error message displayed
+        errMsg = "Date and time unavailable";   // Change error message
+        res.render("reservation", {message: errMsg});   // Reloads page with error message displayed
     } 
     else {
-        //console.log(req.body.location);
+        console.log(req.body.location);
         
         // Make new Reservation object
         let newReserv = new reservData({
@@ -127,7 +119,7 @@ app.post("/reservation", ensureLogin, (req, res) => {
             note: req.body.note
         });
 
-        //console.log(newReserv);
+        console.log(newReserv);
         
         // Attempts to save object into database
         newReserv.save((err) => {
@@ -166,10 +158,15 @@ app.post("/reservation", ensureLogin, (req, res) => {
 
 // Gets display and pass id params
 app.get("/display", (req, res) => {
-    //const id = req.params.id;   // Saves id params
+    const id = req.params.id;   // Saves id params
     //console.log(`ID param: ${id}`);
     res.render("display");  // Render display page
 });
+// app.get("/display/:id", (req, res) => {
+//     const id = req.params.id;   // Saves id params
+//     //console.log(`ID param: ${id}`);
+//     res.render("display");  // Render display page
+// });
 
 // Gets the pricing.html from server and loads it to browser
 app.get("/pricing", (req, res) => {
@@ -188,30 +185,32 @@ app.get("/contact", (req, res) => {
 
 // Gets the login.html from server and loads it to browser
 app.get('/login', (req, res) => {
-    res.render('login');
+    errMsg = "";
+    res.render('login', {message: errMsg});
 });
 
 app.post('/login', (req, res) => { 
     // Find user existing user using username
-    UserData.find({
+    UserData.findOne({
         username: req.body.username
     }).exec()
     .then((userdatas) => {
         if(userdatas) { // If userdatas is not empty
             // Compare encrypted password with password inputted by user
-            bcrypt.compare(req.body.password, userdatas[0].password)
+            bcrypt.compare(req.body.password, userdatas.password)
             .then((result) => {
-                if (result == false) {  // Check if the passwords are different
-                    res.render('login', {passwordErr: "Password Incorrect"}); // Reload login page with error message displayed
+                if (result == false) {  // Check if the passwords are differend
+                    errMsg = "Password Incorrect";  // Set message to be display password is incorrect
+                    res.render('login', {message: errMsg}); // Reload login page with error message displayed
                 }
                 else {
+                    errMsg = "";    // Remove error message
+
                     // Returns user's username and email to the session
                     req.session.user = {
-                        username: userdatas[0].username,
-                        email: userdatas[0].email
+                        username: userdatas.username,
+                        email: userdatas.email
                     }
-
-                    //console.log(req.session.user);
 
                     res.redirect('/');  // Send user to the main page
                 }
@@ -219,13 +218,10 @@ app.post('/login', (req, res) => {
         }
     })
     .catch((err) => {
-        res.render('login', {usernameErr: "Username Incorrect"}); // Reload page with error message displayed
-    });
-});
-
-app.get('/logout', (req, res) => {
-    req.session.reset();
-    res.redirect("/");
+        // Set error message
+        errMsg = "Username Incorrect";
+        res.render('login', {message: errMsg}); // Reload page with error message displayed
+    })
 });
 
 // Gets the signup.html from server and loads it to browser
@@ -237,7 +233,7 @@ app.get('/signup', (req, res) => {
 app.post("/signup", (req, res) => {
     if(req.body.password != req.body.checkPassword) {   // Check if password is the same for re-entered password
         // Outputs password mismatch error
-        res.render("signup", {repasswordErr: "Passwords Do Not Match"});
+        console.log("Passwords Do Not Match");
     }
     else {
         // Generates salt for Hashing password
@@ -267,7 +263,7 @@ app.post("/signup", (req, res) => {
                         if(err) {
                             // Check for error code 11000, unique key viloations
                             if(err.code == 11000){
-                                res.render("signup", {usernameTaken: "Username taken"});
+                                res.render("signup", {userMessage: "Username taken"});
                             }
                             
                             // Reject and output error message when a different error has occured
@@ -277,7 +273,7 @@ app.post("/signup", (req, res) => {
                             // Output success message
                             console.log("User Successfully Saved");
                             // Outputs user object
-                            //console.log(newUser);
+                            console.log(newUser);
                             // Redirect user to login page
                             res.redirect("/login");
                         };
@@ -286,6 +282,30 @@ app.post("/signup", (req, res) => {
             });
         });
     };  // END OF SIGNUP FUNCTIONITLY (SAVING NEW USER)
+
+    // UserData.find({
+    //     username: req.body.username
+    // }).exec()
+    // .then(result => {
+    //     console.log(`Users that match Username: ${result}`);
+    //     if(result) {
+    //         res.render('signup', {userMessage: "Username Taken", emailMessage: ""});
+    //     }
+    //     else {
+    //         UserData.find({
+    //             email: req.body.email
+    //         }).exec()
+    //         .then(rez => {
+    //             console.log(`Users that match Email: ${rez}`);
+    //             if (rez) {
+    //                 res.render('signup', {userMessage: "", emailMessage: "Email already used"});
+    //             }
+    //             else {
+                    
+    //             };
+    //         }); 
+    //     };
+    // });
 });
 
 // Catch all for incorrect path names

@@ -17,7 +17,7 @@
             <div class="form__input-group">
                 <!-- Create Username Text Box -->
                 <input type="text" id="createUsername" name="username" class="form__input" autofocus placeholder="Username" value="" required>
-                <div class="form__input-error-message">{{usernameTaken}}</div>
+                <div class="form__input-error-message">{{userMessage}}</div>
             </div>
 
             <!-- Add Email Text Box -->
@@ -35,7 +35,7 @@
             <!-- Check Password Text Box -->
             <div class="form__input-group">
                 <input type="password" id="checkPassword" name="checkPassword" class="form__input" autofocus placeholder="Confirm password" required>
-                <div class="form__input-error-message">{{repasswordErr}}</div>
+                <div class="form__input-error-message"></div>
             </div>
 
             <button class="form__button" type="submit" href="/">Continue</button>

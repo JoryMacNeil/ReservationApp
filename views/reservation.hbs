@@ -35,18 +35,12 @@
           <li class = "active"><a href="reservation">Make a Reservation</a></li>
           <li><a href="pricing">Prices</a></li>
           <li><a href="contact-us">Contact</a></li>
-        {{#if session.user}}
-          <li>
-            <div class="dropdown">{{session.user.username}}
-              <div class="dropdown-content">
-                <a href="logout">Logout</a>
-              </div>
-          </div></li>
-        {{else}}
           <li><a href="login">Login</a></li>
-        {{/if}}
         </ul>
       </div>
+      {{#if session.user}}
+        <div>{{session.user.username}}</div>
+      {{/if}}
     </div>
     <!--/.container--> 
   </nav>
@@ -80,11 +74,11 @@
         <div class="col-sm-5 col-sm-offset-1">
           <div class="form-group">
             <label>Name *</label>
-            <input type="text" name="name" class="form-control" required id="name">
+            <input type="text" name="name" class="form-control" required ="required" id="name">
           </div>
           <div class="form-group">
             <label>Email *</label>
-            <input type="email" name="email" class="form-control" required id="email">
+            <input type="email" name="email" class="form-control" required = "required" id="email">
           </div>
           <div class="form-group">
             <label>Phone *</label>
@@ -92,31 +86,26 @@
           </div>
           <div class="form-group">
             <label>Booking Date/Time *</label>
-            <input type="datetime-local" class="form-control" id="date" name="bookFor" required>
-            <div class="form__input-error-message">{{datetimeErr}}</div>
-          </div>
-          <div class="col-sm-5">
-            <div class="form-group">
-              <label>Choose a Cafe</label>
-              <select id="location" name="location" required>
-                <option value="Cafe 1, streetname, ON, A1B 2C3">Cafe 1, streetname, ON, A1B 2C3</option>
-                <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, roadname, ON, D4E 5F6</option>
-                <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, avenuename, ON, G7H 8I9</option>
-              </select>
-              <div class="form__input-error-message"></div>
-            </div>
+            <input type="datetime-local" class="form-control" id="date" name="bookFor" required = "required">
+            <div class="form__input-error-message">{{message}}</div>
           </div>
         </div>
         <div class="col-sm-5">
           <div class="form-group">
             <label>How many People *</label>
-            <input type="number" min="0" name="subject" class="form-control" required id="people" name="custCount">
+            <input type="number" min="0" name="subject" class="form-control" required ="required" id="people" name="custCount">
           </div>
-          <div class="form-group">
+          <div class="col-sm-5">
+            <label>Choose a Cafe</label>
+            <select id="location" name="location" required = "required">
+              <option value="Cafe 1, streetname, ON, A1B 2C3">Cafe 1, streetname, ON, A1B 2C3</option>
+              <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, roadname, ON, D4E 5F6</option>
+              <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, avenuename, ON, G7H 8I9</option>
+            </select>
+          
             <label>Additional Notes</label>
             <textarea name="message" id="message" name="note" class="form-control" rows="8"></textarea>
-          </div>
-          <div class="form-group">
+          
             <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit Booking</button>
           </div>
         </div>
