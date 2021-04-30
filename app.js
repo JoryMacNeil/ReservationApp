@@ -234,12 +234,14 @@ app.post("/signup", (req, res) => {
                     console.log("There was an error encrypting the password");
                 }
                 else {
+                    const accountT = "customer"
+
                     // Create the new user and saves form data to the object
                     let newUser = new UserData({
                         username: req.body.username,
                         email: req.body.email,
                         password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
-                        accType: "customer"     // Set new account type to be a customer account
+                        accType: accountT     // Set new account type to be a customer account
                     });
 
                     // Attempts to save user into DB
