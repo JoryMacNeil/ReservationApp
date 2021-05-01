@@ -4,9 +4,6 @@ const clientSessions = require ("client-sessions");
 const bcrypt = require("bcryptjs");
 const exphbs = require("express-handlebars");
 
-const User = require('./public/js/model/user');
-const reservData = require('./public/js/model/reservation');
-
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666Admin:PRJ666-Password@prj666-cluster.n7led.mongodb.net/PRJ666?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
@@ -17,6 +14,9 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCre
 .catch((err) => {
     console.log(`Error ${err} found`);
 });
+
+const User = require('./public/js/model/user');
+const reservData = require('./public/js/model/reservation');
 
 const express = require("express");
 // Create express app
