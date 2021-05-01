@@ -4,12 +4,11 @@ const clientSessions = require ("client-sessions");
 const bcrypt = require("bcryptjs");
 const exphbs = require("express-handlebars");
 
-//const auth = require("./js/auth");
 const UserData = require('./public/js/model/user');
 const reservData = require('./public/js/model/reservation');
 
 const mongoose = require("mongoose");
-const dbURI = "mongodb+srv://PRJ666Admin:PRJ666-Password@prj666-cluster.n7led.mongodb.net/PRJ666DB?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://PRJ666Admin:PRJ666-Password@prj666-cluster.n7led.mongodb.net/PRJ666?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 .then((result) => {
     console.log("Connected to Mongo Database");
