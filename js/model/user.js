@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
 
-const UserData = mongoose.model('UserData', userSchema);
-module.exports = UserData;
+const UserData = mongoose.model('User', userSchema);
+module.exports = User;

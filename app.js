@@ -4,7 +4,7 @@ const clientSessions = require ("client-sessions");
 const bcrypt = require("bcryptjs");
 const exphbs = require("express-handlebars");
 
-const UserData = require('./public/js/model/user');
+const User = require('./public/js/model/user');
 const reservData = require('./public/js/model/reservation');
 
 const mongoose = require("mongoose");
@@ -177,7 +177,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => { 
     // Find user existing user using username
-    UserData.find({
+    User.find({
         username: req.body.username
     }).exec()
     .then((userdatas) => {
@@ -236,7 +236,7 @@ app.post("/signup", (req, res) => {
                     const accountT = "customer"
 
                     // Create the new user and saves form data to the object
-                    let newUser = new UserData({
+                    let newUser = new User({
                         username: req.body.username,
                         email: req.body.email,
                         password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
