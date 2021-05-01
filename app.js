@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
-const dbURI = "mongodb+srv://PRJ666Admin:PRJ666-Password@prj666-cluster.n7led.mongodb.net/PRJ666?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 .then((result) => {
     console.log("Connected to Mongo Database");
