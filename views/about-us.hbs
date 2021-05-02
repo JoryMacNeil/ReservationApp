@@ -29,22 +29,31 @@
         <a class="navbar-brand" href="/"><i class="fa fa-bolt"></i> Gaming Cafe</a></a> </div>
       <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li class="active"><a href="about-us">About</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="about-us">About</a></li>
           <li><a href="menu">Menu</a></li>
-          <li><a href="reservation">Make a Reservation</a></li>
+          {{#if session.user}}
+            {{#ifEqual session.user.userType "customer"}}
+              <li><a href="reservation">Make a Reservation</a></li>
+            {{/ifEqual}}
+            <!-- Only Show Reservation List for staff accounts -->
+            {{#ifEqual session.user.userType "staff"}}
+              <li><a href="staff">Reseration List</a></li>
+            {{/ifEqual}}
+          {{/if}}
           <li><a href="pricing">Prices</a></li>
           <li><a href="contact-us">Contact</a></li>
           {{#if session.user}}
-              <li>
-                <div class="dropdown">{{session.user.username}}
-                  <div class="dropdown-content">
-                    <a href="logout">Logout</a>
-                  </div>
-              </div></li>
-            {{else}}
-              <li><a href="login">Login</a></li>
-            {{/if}}
+            <li>
+              <div class="dropdown">{{session.user.username}}
+                <div class="dropdown-content">
+                  <a href="logout">Logout</a>
+                </div>
+              </div>
+            </li>
+          {{else}}
+            <li><a href="login">Login</a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
