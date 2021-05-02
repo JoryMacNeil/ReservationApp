@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { createIndexes } = require("../../public/js/model/user");
 const Schema = mongoose.Schema;
 
 // Create a schema for how the data should be held in the database

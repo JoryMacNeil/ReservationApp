@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, autoIndex: false})
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
 .then(() =>{
     console.log("Successfully Connected to Database");
     app.listen(8080);
