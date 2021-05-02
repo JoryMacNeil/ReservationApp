@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // Create a schema for how the data should be held in the database
 const accountDataSchema = new Schema({
-    userID: {
+    userID: {   // One-to-One relationship with the Userdata's ObjectID
         type: Schema.Types.ObjectId,
-        ref: 'userData',
+        ref: 'userData',    // references UserData
         require: true
     },
     username: {

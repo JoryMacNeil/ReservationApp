@@ -15,7 +15,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCrea
 });
 
 const User = require('./js/model/user');
-const accountData = require('./js/model/account')
+//const accountData = require('./js/model/account')
 const reservData = require('./js/model/reservation');
 
 const express = require("express");
@@ -66,7 +66,6 @@ let ensureLogin = (req, res, next) => {
 app.get("/", ensureLogin, (req, res) => {
     res.render('index');
 });
-
 
 // Gets the about-us.html from server and loads it to browser
 app.get("/about-us", ensureLogin, (req, res) => {
@@ -237,7 +236,8 @@ app.post("/signup", (req, res) => {
                     let newUser = new User({
                         username: req.body.username,
                         email: req.body.email,
-                        password: hash         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
+                        password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
+                        accountType: "customer" // Set account type to Customer (ONLY CUSTOMERS WOULD NEED TO CREATE A NEW ACCOUNT)
                     });
 
                     // Attempts to save user into DB
@@ -256,31 +256,39 @@ app.post("/signup", (req, res) => {
                             // Output success message
                             console.log("User Successfully Saved");
 
+                            /*// Locate new user
                             User.find({
                                 username: req.body.username
                             }).exec()
-                            .then((userdatas) => {
-                                if(userdatas) {
-                                    const accountT = "customer"
+                            .then((userdatas) => {  // Get userdata
+                                if(userdatas) { // Check if userdata is not empty
+                                    const accountT = "customer" // Make account type a string labelled "Customer"
 
+                                    // Create new accountData
                                     let newAccount = new accountData({
-                                        userID: userdatas[0]._id.toString(),
+                                        userID: userdatas[0]._id.toString(),    // Convert the userdata's ObjectID into a string and pass as reference
                                         username: userdatas[0].username,
-                                        accountType: accountT
+                                        accountType: accountT   // Set account Type
                                     });
 
-                                    newAccount.save((err) => {
-                                        if(err) {
-                                            console.log(`Error: "${err}" found while saving account`);
+                                    newAccount.save((err) => {  // Attempt to save new Account
+                                        if(err) {   // Check for errors
+                                            // Output error message to console
+                                            console.log(`Error: "${err}" found while saving account`); 
                                         }
-                                        else {
+                                        else { 
+                                            // Output success message to console
                                             console.log(`Account Successfully Saved`);
+                                            // Output newAccount data object
+                                            console.log(newAccount);
                                         }
                                     });
                                 }
-                            }).catch(err => {
+                            }).catch(err => {   // Catch errors while searching for account
+                                // Output error message to console
                                 console.log(`Error: "${err}" found while creating account`);
                             });
+                            */
 
                             // Outputs user object
                             console.log(newUser);
