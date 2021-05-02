@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { createIndexes } = require("../../public/js/model/user");
 const Schema = mongoose.Schema;
 
 // Create a schema for how the data should be held in the database
@@ -21,5 +22,4 @@ const user = new Schema({
         require: true   // Must Require a Account Type
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
-
 module.exports = User = mongoose.model('User', user);

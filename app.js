@@ -6,13 +6,12 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
-.then((result) => {
-    console.log("Connected to Mongo Database");
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, autoIndex: false})
+.then(() =>{
+    console.log("Successfully Connected to Database");
     app.listen(8080);
-})
-.catch((err) => {
-    console.log(`Error ${err} found`);
+}).catch((err) => {
+    console.log(`Error: "${err}" found`);
 });
 
 //mongoose.contection("")
@@ -238,9 +237,7 @@ app.post("/signup", (req, res) => {
                     const accountT = "customer"
 
                     // Create the new user and saves form data to the object
-                    let newUser;
-
-                    newUser= new User({
+                    let newUser = new User({
                         username: req.body.username,
                         email: req.body.email,
                         password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
