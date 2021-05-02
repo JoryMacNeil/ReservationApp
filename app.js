@@ -14,8 +14,6 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
     console.log(`Error: "${err}" found`);
 });
 
-//mongoose.contection("")
-
 const User = require('./public/js/model/user');
 const reservData = require('./public/js/model/reservation');
 
