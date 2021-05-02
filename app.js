@@ -94,9 +94,22 @@ app.get("/menu", ensureLogin, (req, res) => {
 
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
-    res.render('staff');
+    reservData.find().exec()
+    .then(reservs => {
+        if(reservs) {
+            req.body.Name = reservs[0].name,
+            req.body.Email = reservs[0].email,
+            req.body.Phone = reservs[0].phone,
+            req.body.Time = reservs[0].bookFor,
+            req.body.People = reservs[0].custCount,
+            req.body.Cafe = reservs[0].location,
+            req.body.Note = reservs[0].additional_note
 
-    
+            res.render('staff');
+        }
+    }).catch(err => {
+        console.log(`Error: "${err}" found while searching for reservations`);
+    })
 });
 
 // Gets the reservation.html from server and loads it to browser
@@ -207,7 +220,7 @@ app.post('/login', (req, res) => {
                         userType: userdatas[0].accountType
                     }
 
-                    console.log(req.session.user);
+                    //console.log(req.session.user);
 
                     res.redirect('/');  // Send user to the main page
                 }
@@ -234,6 +247,7 @@ app.post("/signup", (req, res) => {
     if(req.body.password != req.body.checkPassword) {   // Check if password is the same for re-entered password
         // Outputs password mismatch error
         console.log("Passwords Do Not Match");
+        res.render('signup');
     }
     else {
         // Generates salt for Hashing password
