@@ -15,6 +15,8 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true, useCre
     console.log(`Error ${err} found`);
 });
 
+//mongoose.contection("")
+
 const User = require('./public/js/model/user');
 const reservData = require('./public/js/model/reservation');
 
@@ -236,11 +238,13 @@ app.post("/signup", (req, res) => {
                     const accountT = "customer"
 
                     // Create the new user and saves form data to the object
-                    let newUser = new User({
+                    let newUser;
+
+                    newUser= new User({
                         username: req.body.username,
                         email: req.body.email,
                         password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
-                        accType: accountT     // Set new account type to be a customer account
+                        accType: accountT       // Set new account type to be a customer account
                     });
 
                     // Attempts to save user into DB

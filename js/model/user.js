@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create a schema for how the data should be held in the database
-const userSchema = new Schema({
+const user = new Schema({
     username: {
         type: String,
         unique: true,   // Username Must Be Unique
@@ -22,5 +22,4 @@ const userSchema = new Schema({
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = User = mongoose.model('User', user);
