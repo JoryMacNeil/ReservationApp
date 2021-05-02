@@ -25,7 +25,17 @@ const app = express();
 // Create new view engine
  app.engine('.hbs', exphbs({
      extname: '.hbs',
-     defaultLayout: ''
+     defaultLayout: '',
+     helpers: {
+         ifEqual: function(obj, val, options) {
+             if(obj == val) {
+               return options.fn(this);
+             }
+             else {
+                 return options.inverse(this);
+             }
+         }
+     }
     }));
 
 // Set .hbs files as view engine
@@ -85,6 +95,8 @@ app.get("/menu", ensureLogin, (req, res) => {
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
     res.render('staff');
+
+    
 });
 
 // Gets the reservation.html from server and loads it to browser
@@ -192,8 +204,10 @@ app.post('/login', (req, res) => {
                     req.session.user = {
                         username: userdatas[0].username,
                         email: userdatas[0].email,
-                        userType: userdatas[0].userType
+                        userType: userdatas[0].accountType
                     }
+
+                    console.log(req.session.user);
 
                     res.redirect('/');  // Send user to the main page
                 }
