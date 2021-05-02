@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true, autoIndex: false})
 .then(() =>{
     console.log("Successfully Connected to Database");
     app.listen(8080);
@@ -14,9 +14,9 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
     console.log(`Error: "${err}" found`);
 });
 
-const User = require('./public/js/model/user');
-const accountData = require('./public/js/model/account');
-const reservData = require('./public/js/model/reservation');
+const User = require('./js/model/user');
+const accountData = require('./js/model/account')
+const reservData = require('./js/model/reservation');
 
 const express = require("express");
 // Create express app
