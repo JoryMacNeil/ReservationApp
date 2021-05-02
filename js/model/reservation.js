@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.schema; // Create variable to sub
 
 // Create a schema for how the data should be held in the database
-const reservationSchema = new mongoose.Schema({
+const reservationSchema = new Schema({
     username: {
         type: String,
         require: true

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 // Create a schema for how the data should be held in the database
 const accountDataSchema = new Schema({
     userID: {

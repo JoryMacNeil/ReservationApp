@@ -233,14 +233,11 @@ app.post("/signup", (req, res) => {
                     console.log("There was an error encrypting the password");
                 }
                 else {
-                    const accountT = "customer"
-
                     // Create the new user and saves form data to the object
                     let newUser = new User({
                         username: req.body.username,
                         email: req.body.email,
-                        password: hash,         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
-                        accType: accountT       // Set new account type to be a customer account
+                        password: hash         // Set password as hashed password (NEVER STORE UNHASHED PASSWORDS)
                     });
 
                     // Attempts to save user into DB
@@ -258,8 +255,36 @@ app.post("/signup", (req, res) => {
                         else {
                             // Output success message
                             console.log("User Successfully Saved");
+
+                            User.find({
+                                username: req.body.username
+                            }).exec()
+                            .then((userdatas) => {
+                                if(userdatas) {
+                                    const accountT = "customer"
+
+                                    let newAccount = new accountData({
+                                        userID: userdatas[0]._id.toString(),
+                                        username: userdatas[0].username,
+                                        accountType: accountT
+                                    });
+
+                                    newAccount.save((err) => {
+                                        if(err) {
+                                            console.log(`Error: "${err}" found while saving account`);
+                                        }
+                                        else {
+                                            console.log(`Account Successfully Saved`);
+                                        }
+                                    });
+                                }
+                            }).catch(err => {
+                                console.log(`Error: "${err}" found while creating account`);
+                            });
+
                             // Outputs user object
                             console.log(newUser);
+
                             // Redirect user to login page
                             res.redirect("/login");
                         };
