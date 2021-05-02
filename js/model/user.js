@@ -15,10 +15,6 @@ const user = new Schema({
     password: {
         type: String,
         require: true   // Must Require a Password
-    },
-    accType: {
-        type: String,
-        require: true   // Must Require a Account Type
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
 module.exports = User = mongoose.model('User', user);
