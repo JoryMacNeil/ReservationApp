@@ -15,6 +15,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
 });
 
 const User = require('./public/js/model/user');
+const accountData = require('./public/js/model/account');
 const reservData = require('./public/js/model/reservation');
 
 const express = require("express");
