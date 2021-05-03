@@ -94,22 +94,7 @@ app.get("/menu", ensureLogin, (req, res) => {
 
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
-    reservData.find().exec()
-    .then(reservs => {
-        if(reservs) {
-            req.body.Name = reservs[0].name,
-            req.body.Email = reservs[0].email,
-            req.body.Phone = reservs[0].phone,
-            req.body.Time = reservs[0].bookFor,
-            req.body.People = reservs[0].custCount,
-            req.body.Cafe = reservs[0].location,
-            req.body.Note = reservs[0].additional_note
-
-            res.render('staff');
-        }
-    }).catch(err => {
-        console.log(`Error: "${err}" found while searching for reservations`);
-    })
+    res.render('staff');
 });
 
 // Gets the reservation.html from server and loads it to browser
