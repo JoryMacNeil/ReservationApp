@@ -1,5 +1,3 @@
-const path = require("path");
-const bodyParser = require("body-parser");
 const clientSessions = require ("client-sessions");
 const bcrypt = require("bcryptjs");
 const exphbs = require("express-handlebars");
