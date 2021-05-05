@@ -4,7 +4,7 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true, autoIndex: false})
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true})
 .then(() =>{
     console.log("Successfully Connected to Database");
     app.listen(8080);
@@ -92,7 +92,16 @@ app.get("/menu", ensureLogin, (req, res) => {
 
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
-    res.render('staff');
+    reservData.find({}, (err, reservs) => {
+        if(err) {
+            console.log(`Error: "${err}" found while getting reservations`);
+            res.render('staff');
+        }
+        else {
+            console.log(reservs);
+            res.render('staff', {reservation: reservs});
+        }
+    });
 });
 
 // Gets the reservation.html from server and loads it to browser

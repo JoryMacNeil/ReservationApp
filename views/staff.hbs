@@ -29,7 +29,7 @@
         <a class="navbar-brand" href="/"><i class="fa fa-bolt"></i> Gaming Cafe</a></a> </div>
       <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="menu">Menu</a></li>
           {{#if session.user}}
@@ -38,7 +38,7 @@
             {{/ifEqual}}
             <!-- Only Show Reservation List for staff accounts -->
             {{#ifEqual session.user.userType "staff"}}
-              <li><a href="staff">Reseration List</a></li>
+              <li><a href="staff" class="active">Reseration List</a></li>
             {{/ifEqual}}
           {{/if}}
           <li><a href="pricing">Prices</a></li>
@@ -80,15 +80,23 @@
         <!--/.col-md-4-->
         
         <div class="col-md-4 col-sm-6">
-{{#if reservation}}
- <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{reservation.name}}"> <br>
- <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{reservation.email}}">  <br>
- <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{resevation.phone}}"> <br>
- <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{reservation.bookTime}}">  <br>
- <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{reservation.CustCount}}"> <br>
- <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{reservation.location}}"> <br>
- <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{reservation.additional_note}}"> <br>
- {{/if}}      
+        {{#each reservation}}
+          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{reservation.name}}"> <br>
+          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{reservation.email}}">  <br>
+          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{resevation.phone}}"> <br>
+          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{reservation.bookTime}}">  <br>
+          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{reservation.CustCount}}"> <br>
+          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{reservation.location}}"> <br>
+          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{reservation.additional_note}}"> <br>
+         <!-- {{else}}
+          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value=""> <br>
+          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="">  <br>
+          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value=""> <br>
+          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="">  <br>
+          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value=""> <br>
+          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value=""> <br>
+          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value=""> <br> -->
+        {{/each}}
         </div>
         <!--/.col-md-4-->
         
