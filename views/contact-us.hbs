@@ -29,7 +29,7 @@
         <a class="navbar-brand" href="/"><i class="fa fa-bolt"></i> Gaming Cafe</a></a> </div>
       <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="about-us">About</a></li>
           <li><a href="menu">Menu</a></li>
           {{#if session.user}}
@@ -42,7 +42,7 @@
             {{/ifEqual}}
           {{/if}}
           <li><a href="pricing">Prices</a></li>
-          <li><a href="contact-us">Contact</a></li>
+          <li><a href="contact-us" class="active">Contact</a></li>
           {{#if session.user}}
               <li>
                 <div class="dropdown">{{session.user.username}}

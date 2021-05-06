@@ -29,8 +29,8 @@
         <a class="navbar-brand" href="/"><i class="fa fa-bolt"></i> Gaming Cafe</a></a> </div>
       <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="about-us">About</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="about-us" class="active">About</a></li>
           <li><a href="menu">Menu</a></li>
           {{#if session.user}}
             {{#ifEqual session.user.userType "customer"}}
