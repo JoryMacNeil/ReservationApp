@@ -117,53 +117,66 @@ app.post("/reservation", ensureLogin, (req, res) => {
         res.render("reservation", {dateTimeErr: "Date and time unavailable"});   // Reloads page with error message displayed
     } 
     else {
-        console.log(req.body.people);
-        
-        // Make new Reservation object
-        let newReserv = new reservData({
-            username: req.session.user.username,
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            bookFor: req.body.bookFor,
-            custNum: req.body.people,
-            location: req.body.location,
-            additional_note: req.body.message
-        });
+        //console.log(req.body.people);
 
-        console.log(newReserv);
-        
-        // Attempts to save object into database
-        newReserv.save((err) => {
-            if (err) {
-                // Outputs error message
-                console.log(`Error: ${err}, occurred while saving new Reservation`);
-            }
-            else { 
-                // Outputs success message
-                console.log("Reservation Sucessfully Made");
-            }
-        });
-
-        // Finds the new reservation
         reservData.find({
             username: req.session.user.username,
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            bookFor: req.body.bookFor,
-            custCount: req.body.custCount,
-            location: req.body.location,
-            note: req.body.note
-        }).sort({timestamp: 'ascending'})   // Sorts it so the newest reservation is at the top
-        .exec()
-        .then(reservs => {
-            // If the reservations array is not empty
-            if(reservs) {
-                //console.log(reservs);
-                res.redirect(`/display`);
+            bookFor: req.body.bookFor
+        }).then(reservs => {
+            console.log(reservs[0]);
+
+            if(reservs[0]) {
+                res.render("reservation", {dateTimeErr: "Cannot make two reservations for the same date and time"});   // Reloads page with error message displayed
+                console.log("Cannot make two reservations for the same date and time");
             }
-        })
+            else {
+                // Make new Reservation object
+                let newReserv = new reservData({
+                    username: req.session.user.username,
+                    name: req.body.name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    bookFor: req.body.bookFor,
+                    custNum: req.body.people,
+                    location: req.body.location,
+                    additional_note: req.body.message
+                });
+
+                //console.log(newReserv);
+        
+                // Attempts to save object into database
+                newReserv.save((err) => {
+                    if (err) {
+                        // Outputs error message
+                        console.log(`Error: ${err}, occurred while saving new Reservation`);
+                    }
+                    else { 
+                        // Outputs success message
+                        console.log("Reservation Sucessfully Made");
+                    }
+                });
+
+                // Finds the new reservation
+                reservData.find({
+                    username: req.session.user.username,
+                    name: req.body.name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    bookFor: req.body.bookFor,
+                    custCount: req.body.custCount,
+                    location: req.body.location,
+                    note: req.body.note
+                }).sort({timestamp: 'ascending'})   // Sorts it so the newest reservation is at the top
+                .exec()
+                .then(reservs => {
+                    // If the reservations array is not empty
+                    if(reservs) {
+                        //console.log(reservs);
+                        res.redirect(`/display`);
+                    }
+                });
+            }
+        });
     }
 });
 
