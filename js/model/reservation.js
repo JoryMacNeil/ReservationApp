@@ -33,6 +33,11 @@ const reservationSchema = new Schema({
     },
     additional_note: {
         type: String
+    },
+    pending: {
+        type: Boolean,
+        default: true,
+        require: true
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
 const reservData = mongoose.model('reservData', reservationSchema);

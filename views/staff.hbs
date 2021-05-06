@@ -81,13 +81,18 @@
         
         <div class="col-md-4 col-sm-6">
         {{#each reservation}}
-          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{name}}"> <br>
-          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{email}}">  <br>
-          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{phone}}"> <br>
-          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{bookFor}}">  <br>
-          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{custNum}}"> <br>
-          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{location}}"> <br>
-          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{additional_note}}"> <br>
+          <div>
+            <form id="reservation-lookup-form" method="POST">
+              <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{name}}"> <br>
+              <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{email}}">  <br>
+              <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{phone}}"> <br>
+              <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{bookFor}}">  <br>
+              <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{custNum}}"> <br>
+              <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{location}}"> <br>
+              <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{additional_note}}"> <br>
+              <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required" value="{{_id}}">Remove Reservation</button><br>
+            </form>
+          </div><br>
          {{else}}
           <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value=""> <br>
           <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="">  <br>
@@ -95,7 +100,7 @@
           <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="">  <br>
           <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value=""> <br>
           <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value=""> <br>
-          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value=""> <br> -->
+          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value=""> <br>
         {{/each}}
         </div>
         <!--/.col-md-4-->

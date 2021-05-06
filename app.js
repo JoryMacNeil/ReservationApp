@@ -4,7 +4,7 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true})
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true, useFindAndModify: false})
 .then(() =>{
     console.log("Successfully Connected to Database");
     app.listen(8080);
@@ -92,9 +92,9 @@ app.get("/menu", ensureLogin, (req, res) => {
 
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
-    reservData.find(
-        {}
-    ).lean()
+    reservData.find({
+        pending: true   // Only search for reservations that are pending
+    }).lean()
     .then((reservs) => {
         // console.log(reservs);
         res.render('staff', {reservation: reservs});
@@ -103,6 +103,26 @@ app.get("/staff", ensureLogin, (req, res) => {
         console.log(`Error: "${err}" found while getting reservations`);
         res.render('staff');
     });
+});
+
+// Update Reservation's pending status
+app.post("/staff", ensureLogin, (req, res) => {
+    reservData.findOneAndUpdate(
+        {_id: req.body.submit},
+        {pending: false},
+        (err, data) => {
+            if(err) {
+                console.log(`Error: "${err}" found while updating reservation`);
+            }
+            else {
+                console.log(`Reservation sucessfully updated`);
+            }
+        }
+    ).then(reservs => {
+       //console.log(reservs);
+
+        res.redirect('/staff');
+    })
 });
 
 // Gets the reservation.html from server and loads it to browser
@@ -121,7 +141,8 @@ app.post("/reservation", ensureLogin, (req, res) => {
 
         reservData.find({
             username: req.session.user.username,
-            bookFor: req.body.bookFor
+            bookFor: req.body.bookFor,
+            pending: true
         }).then(reservs => {
             console.log(reservs[0]);
 
@@ -139,7 +160,8 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     bookFor: req.body.bookFor,
                     custNum: req.body.people,
                     location: req.body.location,
-                    additional_note: req.body.message
+                    additional_note: req.body.message,
+                    pending: true
                 });
 
                 //console.log(newReserv);
@@ -165,7 +187,8 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     bookFor: req.body.bookFor,
                     custCount: req.body.custCount,
                     location: req.body.location,
-                    note: req.body.note
+                    note: req.body.note,
+                    pending: true
                 }).sort({timestamp: 'ascending'})   // Sorts it so the newest reservation is at the top
                 .exec()
                 .then(reservs => {
