@@ -23,7 +23,7 @@ const reservationSchema = new Schema({
         type: Date,
         require: true
     },
-    custCount: {
+    custNum: {
         type: Number,
         require: true
     },
@@ -35,5 +35,5 @@ const reservationSchema = new Schema({
         type: String
     }
 }, {timestamps: true}); // Creates timestamps for creation and updates
-const reservationData = mongoose.model('reservationData', reservationSchema);
-module.exports = reservationData;
+const reservData = mongoose.model('reservData', reservationSchema);
+module.exports = reservData;

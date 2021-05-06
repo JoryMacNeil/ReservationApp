@@ -92,15 +92,16 @@ app.get("/menu", ensureLogin, (req, res) => {
 
 //Gets staffReservation
 app.get("/staff", ensureLogin, (req, res) => {
-    reservData.find({}, (err, reservs) => {
-        if(err) {
-            console.log(`Error: "${err}" found while getting reservations`);
-            res.render('staff');
-        }
-        else {
-            console.log(reservs);
-            res.render('staff', {reservation: reservs});
-        }
+    reservData.find(
+        {}
+    ).lean()
+    .then((reservs) => {
+        // console.log(reservs);
+        res.render('staff', {reservation: reservs});
+    })
+    .catch((err) => {
+        console.log(`Error: "${err}" found while getting reservations`);
+        res.render('staff');
     });
 });
 
@@ -125,12 +126,12 @@ app.post("/reservation", ensureLogin, (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             bookFor: req.body.bookFor,
-            custCount: req.body.custCount,
+            custNum: req.body.num,
             location: req.body.location,
             note: req.body.note
         });
 
-        //console.log(newReserv);
+        console.log(newReserv);
         
         // Attempts to save object into database
         newReserv.save((err) => {

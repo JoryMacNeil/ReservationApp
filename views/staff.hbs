@@ -81,13 +81,13 @@
         
         <div class="col-md-4 col-sm-6">
         {{#each reservation}}
-          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{reservation.name}}"> <br>
-          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{reservation.email}}">  <br>
-          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{resevation.phone}}"> <br>
-          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{reservation.bookTime}}">  <br>
-          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{reservation.CustCount}}"> <br>
-          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{reservation.location}}"> <br>
-          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{reservation.additional_note}}"> <br>
+          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{name}}"> <br>
+          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{email}}">  <br>
+          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{phone}}"> <br>
+          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{bookFor}}">  <br>
+          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{custCount}}"> <br>
+          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{location}}"> <br>
+          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{additional_note}}"> <br>
          <!-- {{else}}
           <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value=""> <br>
           <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="">  <br>
