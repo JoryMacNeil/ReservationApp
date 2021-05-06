@@ -117,7 +117,7 @@ app.post("/reservation", ensureLogin, (req, res) => {
         res.render("reservation", {dateTimeErr: "Date and time unavailable"});   // Reloads page with error message displayed
     } 
     else {
-        //console.log(req.body.location);
+        console.log(req.body.people);
         
         // Make new Reservation object
         let newReserv = new reservData({
@@ -126,9 +126,9 @@ app.post("/reservation", ensureLogin, (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             bookFor: req.body.bookFor,
-            custNum: req.body.num,
+            custNum: req.body.people,
             location: req.body.location,
-            note: req.body.note
+            additional_note: req.body.message
         });
 
         console.log(newReserv);
