@@ -105,22 +105,24 @@ app.get("/staff", ensureLogin, (req, res) => {
     });
 });
 
-// Update Reservation's pending status
+// Update Reservation's pending status (NEVER DELETE DATA FOR LOGGING PURPOSES)
 app.post("/staff", ensureLogin, (req, res) => {
+    // Finds and updates reservation's data
     reservData.findOneAndUpdate(
-        {_id: req.body.submit},
-        {pending: false},
-        (err, data) => {
+        {_id: req.body.submit}, // Used the submit buttons value to identify one reservation from anothers
+        {pending: false},   // Sets pending to false
+        (err, data) => {    // Callback function to detect errors
             if(err) {
-                console.log(`Error: "${err}" found while updating reservation`);
+                console.log(`Error: "${err}" found while updating reservation`);    // Outputs error to console
             }
             else {
-                console.log(`Reservation sucessfully updated`);
+                console.log(`Reservation successfully updated`); // Outputs success to console
             }
         }
     ).then(reservs => {
        //console.log(reservs);
 
+       // Refresh the page to show updated list of pending reservations
         res.redirect('/staff');
     })
 });
