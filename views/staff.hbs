@@ -38,7 +38,7 @@
             {{/ifEqual}}
             <!-- Only Show Reservation List for staff accounts -->
             {{#ifEqual session.user.userType "staff"}}
-              <li><a href="staff" class="active">Reseration List</a></li>
+              <li><a href="staff" class="active">Reservation List</a></li>
             {{/ifEqual}}
           {{/if}}
           <li><a href="pricing">Prices</a></li>
@@ -83,24 +83,83 @@
         {{#each reservation}}
           <div>
             <form id="reservation-lookup-form" method="POST">
-              <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value="{{name}}"> <br>
-              <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="{{email}}">  <br>
-              <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value="{{phone}}"> <br>
-              <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="{{bookFor}}">  <br>
-              <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value="{{custNum}}"> <br>
-              <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value="{{location}}"> <br>
-              <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value="{{additional_note}}"> <br>
+              <table style="margin: 0px auto;">
+                
+              <tr>
+              <td><label for="name">Name: </label></td>
+               <td><input type="text" name="Name" style="width:250px;" readonly="readonly" value="{{name}}"> <br></td>
+              </tr>
+
+              <tr>
+              <td><label for="email">Email: </label></td>
+              <td><input type="text" name="Email" style="width:250px;" readonly="readonly" value="{{email}}"><br></td>
+              </tr>
+
+              <tr>
+              <td><label for="number">Phone Number: </label></td> 
+              <td><input type="text" name="Phone" style="width:250px;" readonly="readonly" value="{{phone}}"> <br></td>
+              </tr>
+
+              <tr>
+              <td><label for="date">Time: </label></td> 
+              <td><input type="text" name="Time" style="width:250px;" readonly="readonly" value="{{bookFor}}"><br></td> 
+              </tr>
+
+              <tr>
+              <td><label for="people">People: </label></td> 
+              <td><input type="text" name="People" style="width:250px;" readonly="readonly" value="{{custNum}}"> <br></td>
+              </tr>
+
+              <tr>
+              <td><label for="cafe">Cafe: </label></td> 
+              <td><input type="text" name="Cafe" style="width:250px;" readonly="readonly" value="{{location}}"> <br></td>
+              </tr>
+
+              <tr>
+              <td><label for="note">Additional Notes: </label></td> 
+              <td><input type="text" name="Note" style="width:250px;" readonly="readonly" value="{{additional_note}}"></td><br>
+              </tr>
+              </table>
               <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required" value="{{_id}}">Remove Reservation</button><br>
             </form>
           </div><br>
          {{else}}
-          <label for="name">Name: </label> <input type="text" name="Name" readonly="readonly" value=""> <br>
-          <label for="email">Email: </label> <input type="text" name="Email" readonly="readonly" value="">  <br>
-          <label for="number">Phone Number: </label> <input type="text" name="Phone" readonly="readonly" value=""> <br>
-          <label for="date">Time: </label> <input type="text" name="Time" readonly="readonly" value="">  <br>
-          <label for="people">People: </label> <input type="text" name="People" readonly="readonly" value=""> <br>
-          <label for="cafe">Cafe: </label> <input type="text" name="Cafe" readonly="readonly" value=""> <br>
-          <label for="note">Additional Note: </label> <input type="text" name="Note" readonly="readonly" value=""> <br>
+         <table style="margin: 0px auto;">
+           <tr>
+          <td><label for="name">Name: </label></td> 
+          <td><input type="text" name="Name" readonly="readonly" value=""></td> <br>
+          </tr>
+
+          <tr>
+          <td><label for="email">Email: </label></td> 
+          <td><input type="text" name="Email" readonly="readonly" value=""></td>  <br>
+          </tr>
+
+          <tr>
+          <td><label for="number">Phone Number: </label></td> 
+          <td><input type="text" name="Phone" readonly="readonly" value=""></td> <br>
+          </tr>
+
+          <tr>
+          <td><label for="date">Time: </label></td> 
+          <td><input type="text" name="Time" readonly="readonly" value=""></td>  <br>
+          </tr>
+
+          <tr>
+          <td><label for="people">People: </label></td> 
+          <td><input type="text" name="People" readonly="readonly" value=""></td> <br>
+          </tr>
+
+          <tr>
+          <td><label for="cafe">Cafe: </label></td> 
+          <td><input type="text" name="Cafe" readonly="readonly" value=""></td> <br>
+          </tr>
+
+          <tr>
+          <td><label for="note">Additional Notes: </label></td> 
+          <td><input type="text" name="Note" readonly="readonly" value=""></td> <br>
+          </tr>
+          </table>
         {{/each}}
         </div>
         <!--/.col-md-4-->
