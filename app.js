@@ -191,13 +191,12 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     location: req.body.location,
                     note: req.body.note,
                     pending: true
-                }).sort({timestamp: 'ascending'})   // Sorts it so the newest reservation is at the top
-                .exec()
+                }).exec()
                 .then(reservs => {
                     // If the reservations array is not empty
                     if(reservs) {
-                        //console.log(reservs);
-                        res.redirect(`/display`);
+                        console.log(reservs[0].id);
+                        //res.redirect(`/display/${reserv[0]._id}`);
                     }
                 });
             }
@@ -205,9 +204,20 @@ app.post("/reservation", ensureLogin, (req, res) => {
     }
 });
 
-// Gets display and pass id params
 app.get("/display", ensureLogin, (req, res) => {
-    res.render("display");  // Render display page
+    res.render("display");
+});
+
+// Gets display and pass id params
+app.get("/display/:id", ensureLogin, (req, res) => {
+    reservData.findById(req.params.id)
+    .then(reserv => {
+        res.render("display", {reservation: reserv});  // Render display page
+    })
+    .catch(err => {
+        console.log(`Error: "${err}" found while fetching new reservation data`);
+    });
+
 });
 
 // Gets the pricing.html from server and loads it to browser
