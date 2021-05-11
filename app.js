@@ -51,8 +51,8 @@ app.use(clientSessions(
     {
         cookieName: "session",
         secret: "prj666-reservation-application",
-        duration: 3 * 60 * 1000,
-        activeDuration: 1000 * 60
+        duration: 20 * 60 * 1000,    // 20 minute
+        activeDuration: 10 * 1000 * 60   // 10 minute
     }
 ));
 app.use((req, res, next) => {
@@ -145,7 +145,8 @@ app.post("/reservation", ensureLogin, (req, res) => {
             username: req.session.user.username,
             bookFor: req.body.bookFor,
             pending: true
-        }).then(reservs => {
+        })
+        .then(reservs => {
             console.log(reservs[0]);
 
             if(reservs[0]) {
@@ -166,7 +167,8 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     pending: true
                 });
 
-                //console.log(newReserv);
+                console.log(newReserv);
+                //console.log(`ObjectId: ${newReserv._id}`);
         
                 // Attempts to save object into database
                 newReserv.save((err) => {
@@ -177,26 +179,9 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     else { 
                         // Outputs success message
                         console.log("Reservation Sucessfully Made");
-                    }
-                });
+                        //console.log(`ObjectId: ${newReserv._id}`);
 
-                // Finds the new reservation
-                reservData.find({
-                    username: req.session.user.username,
-                    name: req.body.name,
-                    email: req.body.email,
-                    phone: req.body.phone,
-                    bookFor: req.body.bookFor,
-                    custCount: req.body.custCount,
-                    location: req.body.location,
-                    note: req.body.note,
-                    pending: true
-                }).exec()
-                .then(reservs => {
-                    // If the reservations array is not empty
-                    if(reservs) {
-                        console.log(reservs[0].id);
-                        //res.redirect(`/display/${reserv[0]._id}`);
+                        res.redirect(`/display/${newReserv._id}`);
                     }
                 });
             }
@@ -204,20 +189,39 @@ app.post("/reservation", ensureLogin, (req, res) => {
     }
 });
 
+// Default path for Display
 app.get("/display", ensureLogin, (req, res) => {
     res.render("display");
 });
 
 // Gets display and pass id params
 app.get("/display/:id", ensureLogin, (req, res) => {
-    reservData.findById(req.params.id)
-    .then(reserv => {
-        res.render("display", {reservation: reserv});  // Render display page
+    reservData.find({
+        _id: req.params.id,
+        pending: true
+    })
+    .lean()
+    .then((result) => {
+        if(result) {
+            //console.log(result[0]);
+            res.render("display", {reservation: result[0]});  // Render display page
+        }
+        else {
+            res.redirect('/display');
+        }
     })
     .catch(err => {
         console.log(`Error: "${err}" found while fetching new reservation data`);
     });
 
+});
+
+// Gets display and pass id params
+app.post("/display/:id", ensureLogin, (req, res) => {
+    reservData.findByIdAndUpdate(req.params.id, {pending: false})
+    .then(result => {
+        res.redirect('/display');
+    });
 });
 
 // Gets the pricing.html from server and loads it to browser

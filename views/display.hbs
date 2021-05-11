@@ -83,43 +83,43 @@
      
           <tr>
             <td><label for="name">Name:</label></td> 
-            <td><input type="text" name="Name" style="width:250px;" readonly="readonly" value="{{name}}"> <br></td>
+            <td><input type="text" name="Name" style="width:250px;" readonly="readonly" value="{{reservation.name}}"> <br></td>
           </tr>
 
           <tr>
             <td><label for="email">Email:</label></td>
-            <td><input type="text" name="Email" style="width:250px;" readonly="readonly" value="{{email}}">  <br></td>
+            <td><input type="text" name="Email" style="width:250px;" readonly="readonly" value="{{reservation.email}}">  <br></td>
           </tr>
 
           <tr>
             <td><label for="number">Phone Number:</label></td> 
-            <td><input type="text" name="Phone" style="width:250px;" readonly="readonly" value="{{phone}}"> <br></td>
+            <td><input type="text" name="Phone" style="width:250px;" readonly="readonly" value="{{reservation.phone}}"> <br></td>
           </tr>
 
           <tr>
             <td><label for="date">Time:</label></td> 
-            <td><input type="text" name="Time" style="width:250px;" readonly="readonly" value="{{bookFor}}"> <br></td> 
+            <td><input type="text" name="Time" style="width:250px;" readonly="readonly" value="{{reservation.bookFor}}"> <br></td> 
           </tr>
 
           <tr>
             <td><label for="people">People:</label></td> 
-            <td><input type="text" name="People" style="width:250px;" readonly="readonly" value="{{custNum}}"> <br></td>
+            <td><input type="text" name="People" style="width:250px;" readonly="readonly" value="{{reservation.custNum}}"> <br></td>
           </tr>
 
           <tr>
             <td><label for="cafe">Cafe:</label></td> 
-            <td><input type="text" name="Cafe" style="width:250px;" readonly="readonly" value="{{location}}"></td> <br>
+            <td><input type="text" name="Cafe" style="width:250px;" readonly="readonly" value="{{reservation.location}}"></td> <br>
           </tr>
 
           <tr>
             <td><label for="note">Additional Notes:</label></td>
-            <td><input type="text" name="Note" style="width:250px;" readonly="readonly" value="{{additional_note}}"></td> <br>
+            <td><input type="text" name="Note" style="width:250px;" readonly="readonly" value="{{reservation.additional_note}}"></td> <br>
           </tr>
         </table>
-        <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required" value="{{_id}}">Cancel Reservation</button><br>
+        <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required" value="{{reservation._id}}">Cancel Reservation</button><br>
       </form>
-    {{else}} <!-- Show nothing if there is no ID -->
-      <form id="reservation-lookup-form" method="">
+    {{else}}
+      <form id="reservation-lookup-form" method="POST">
         <table style="margin: 0px auto;">
      
           <tr>
