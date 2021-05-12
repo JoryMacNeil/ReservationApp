@@ -189,6 +189,36 @@ app.post("/reservation", ensureLogin, (req, res) => {
     }
 });
 
+app.get("/customer", ensureLogin, (req, res) => {
+    reservData.find({
+      username: req.session.user.username  ,
+      pending: true
+    }).lean()
+    .then(results => {
+        if (results) {
+            //console.log(results);
+            res.render('customer', {reservation: results});
+        }
+    }).catch(err => {
+        console.log(`Error: "${err}" while loading data to customer page`);
+        res.render('customer');
+    });
+});
+
+app.post("/customer", ensureLogin, (req, res) => {
+    reservData.findOneAndUpdate(
+        {_id: req.body.cancel},
+        {pending: false}
+    ).then(result => {
+        //console.log(result);
+        res.redirect('/customer');
+    })
+    .catch(err => {
+        console.log(`Error: "${err}" while cancelling reservations`);
+        res.redirect('/customer');
+    })
+});
+
 // Default path for Display
 app.get("/display", ensureLogin, (req, res) => {
     res.render("display");

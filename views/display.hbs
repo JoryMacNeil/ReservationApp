@@ -36,6 +36,7 @@
           {{#if session.user}}
             {{#ifEqual session.user.userType "customer"}}
               <li><a href="reservation" class="active">Make a Reservation</a></li>
+              <li><a href="customer">My Reservations</a></li>
             {{/ifEqual}}
             <!-- Only Show Reservation List for staff accounts -->
             {{#ifEqual session.user.userType "staff"}}
