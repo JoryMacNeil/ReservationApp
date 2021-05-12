@@ -147,6 +147,10 @@ body > section {
 	line-height: 24px;
 	display: inline-block;
 }
+.navbar-inverse .navbar-nav > li > a:hover {
+	background-color: #3498db;
+	color: #fff;
+}
 .navbar-inverse .navbar-nav > li > .dropdown {
 	padding: 5px 12px;
 	margin: 0;
@@ -155,9 +159,32 @@ body > section {
 	line-height: 24px;
 	display: inline-block;
 }
-.navbar-inverse .navbar-nav > li > a:hover {
+.navbar-inverse .navbar-nav > li > .dropdown > .dropdown-name{
+	padding: 5px 12px;
+	margin: 0;
+	border-radius: 3px;
+	color: #fff;
+	line-height: 24px;
+	display: inline-block;
+}
+.navbar-inverse .navbar-nav > li > .dropdown:hover > .dropdown-name {
 	background-color: #3498db;
 	color: #fff;
+}
+.navbar-inverse .navbar-nav > li > .dropdown > .dropdown-content{
+	padding: 5px 12px;
+	margin: 0;
+	border-radius: 3px;
+	color: #fff;
+	line-height: 24px;
+	display: none;
+}
+.navbar-inverse .navbar-nav > li > .dropdown:hover > .dropdown-content{
+	display: block;
+}
+.navbar-inverse .navbar-nav > li > .dropdown:hover > .dropdown-content:hover {
+	background-color: #3498db;
+	color: red
 }
 .navbar-inverse {
 	border: none;
@@ -556,7 +583,7 @@ a.accordion-toggle i {
 	padding: 0;
 }
 .partners ul li {
-	display: block;
+	display: in-block;
 	float: left;
 	width: 20%;
 }
@@ -568,7 +595,6 @@ a.accordion-toggle i {
 /*************************
 ********* About Us Page CSS ******
 **************************/
-
 .about-us {
 	padding-bottom: 50px;
 }
@@ -724,7 +750,6 @@ a.accordion-toggle i {
 /*************************
 ********* Contact Us CSS ******
 **************************/
-
 .contact_top {
 	margin-right: 0;
 	margin-left: 0;

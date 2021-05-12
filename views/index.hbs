@@ -7,11 +7,11 @@
 <meta name="description" content="">
 
 <!-- core CSS -->
-<link href="../public/css/bootstrap.min.css" rel="stylesheet">
-<link href="../public/css/font-awesome.min.css" rel="stylesheet">
-<link href="../public/css/prettyPhoto.css" rel="stylesheet">
-<link href="../public/css/main.css" rel="stylesheet">
-<link href="../pubic/css/responsive.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link href="../css/prettyPhoto.css" rel="stylesheet">
+<link href="../css/main.css" rel="stylesheet">
+<link href="../css/responsive.css" rel="stylesheet">
 </head>
 <!--/head-->
 
@@ -48,7 +48,8 @@
           <li><a href="contact-us">Contact</a></li>
           {{#if session.user}}
               <li>
-                <div class="dropdown">{{session.user.username}}
+                <div class="dropdown">
+                  <div class="dropdown-name">{{session.user.username}}</div>
                   <div class="dropdown-content">
                     <a href="logout">Logout</a>
                   </div>
