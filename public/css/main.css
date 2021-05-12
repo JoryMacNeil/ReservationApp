@@ -556,7 +556,7 @@ a.accordion-toggle i {
 	padding: 0;
 }
 .partners ul li {
-	display: inline-block;
+	display: block;
 	float: left;
 	width: 20%;
 }
