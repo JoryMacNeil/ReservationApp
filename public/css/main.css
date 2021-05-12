@@ -147,6 +147,14 @@ body > section {
 	line-height: 24px;
 	display: inline-block;
 }
+.navbar-inverse .navbar-nav > li > .dropdown {
+	padding: 5px 12px;
+	margin: 0;
+	border-radius: 3px;
+	color: #fff;
+	line-height: 24px;
+	display: inline-block;
+}
 .navbar-inverse .navbar-nav > li > a:hover {
 	background-color: #3498db;
 	color: #fff;
