@@ -88,6 +88,9 @@ body > section {
 	line-height: 24px;
 	font-weight: 400;
 }
+.form__input-error-message {
+	color: red;
+}
  @-webkit-keyframes scaleIn {
  0% {
  opacity: 0;

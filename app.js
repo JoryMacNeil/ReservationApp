@@ -4,10 +4,26 @@ const exphbs = require("express-handlebars");
 
 const mongoose = require("mongoose");
 const dbURI = "mongodb+srv://PRJ666-Admin:PRJ666-Password@prj666-cluster.efkzi.mongodb.net/PRJ666?retryWrites=true&w=majority";
+
+let today = new Date();
+
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true, useFindAndModify: false})
 .then(() =>{
     console.log("Successfully Connected to Database");
-    app.listen(8080);
+    // Auto removes reservations booked before today
+    reservData.updateMany(
+        {
+            pending: true,
+            bookFor: {$lt: today}
+        },
+        {$set: {pending: false}}
+    ).exec().then(result => {
+        //console.log(result);
+        app.listen(8080);
+    }).catch(err => {
+        console.log(`Error: "${err}" found during reservation filtering`);
+        app.listen(8080);
+    })
 }).catch((err) => {
     console.log(`Error: "${err}" found`);
 });
@@ -134,8 +150,9 @@ app.get("/reservation", ensureLogin, (req, res) => {
 
 app.post("/reservation", ensureLogin, (req, res) => {
     let today = new Date(); // Gets todays date and time
+    let booked = new Date(req.body.bookFor);
 
-    if (req.body.bookFor <= today) {    // Check if the date and time is today or in the past
+    if (booked <= today) {    // Check if the date and time is today or in the past
         res.render("reservation", {dateTimeErr: "Date and time unavailable"});   // Reloads page with error message displayed
     } 
     else {
