@@ -21,11 +21,7 @@ const reservationSchema = new Schema({
     },
     bookFor: {
         type: Date,
-        require: true,
-        // Validates date is not in the past
-        validate: function(date) {
-            return typeof new Date(date) > new Date();
-        }
+        require: true
     },
     custNum: {
         type: Number,

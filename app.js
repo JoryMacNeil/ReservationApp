@@ -192,6 +192,7 @@ app.post("/reservation", ensureLogin, (req, res) => {
                     if (err) {
                         // Outputs error message
                         console.log(`Error: ${err}, occurred while saving new Reservation`);
+                        res.render('reservation');
                     }
                     else { 
                         // Outputs success message
