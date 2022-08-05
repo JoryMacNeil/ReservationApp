@@ -20,7 +20,7 @@
     "build": "browserify ./js/signup.js -o ./js/browserify/bundle.js",
     "watch": "watchify ./js/signup.js -o ./js/browserify/bundle.js"
   },
-  "author": "Jeffry Lai & Jory MacNeil",
+  "author": "Jory MacNeil",
   "license": "ISC",
   "description": ""
 }
