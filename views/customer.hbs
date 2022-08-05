@@ -114,10 +114,11 @@
                         <td><input type="text" name="Note" style="width:250px;" readonly="readonly" value="{{additional_note}}"></td> <br>
                     </tr>
                 </table>
-                <button type="submit" name="cancel" class="btn btn-primary btn-lg" required="required" value="{{_id}}">Cancel Reservation</button><br>
+                <button type="submit" name="cancel" class="btn btn-primary btn-lg" style ="background-color: #f44336;" required="required" value="{{_id}}">Cancel Reservation</button><br><br>
             </form>
         {{else}}
             <form id="reservation-lookup-form" method="POST">
+                
                 <table style="margin: 0px auto;">
                     <tr>
                         <td><label for="name">Name:</label></td>
@@ -157,6 +158,7 @@
             </form>
         {{/each}}
         </div>
+
         <!--/.col-md-4-->
         
         <div class="col-md-4 col-sm-6">
@@ -187,7 +189,7 @@
 <!--/#inner-page-->
 
   <!--/.container--> 
-</section>
+</section><br><br>
 <!--/#get-started-->
 <div class="color-border"> </div>
 <footer id="footer">

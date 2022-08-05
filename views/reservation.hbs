@@ -70,6 +70,7 @@
       <h2>Make a Reservation</h2>
       <p class="lead">Tables are going fast act quickly to reserve a table for you and your friends and choose which games you want to book.</p>
     </div>
+    <!--
     <ul class="portfolio-filter text-center">
       <h2> Select your reservation needs</h2>
       <li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
@@ -77,7 +78,7 @@
       <li><a class="btn btn-default" href="#" data-filter=".apps">Group Booking</a></li>
       <li><a class="btn btn-default" href="#" data-filter=".branding">Event Booking</a></li>
     </ul>
-<!--/header-->
+/header-->
 
 
 
@@ -108,23 +109,23 @@
           <div class="form-group">
             <label>Choose a Cafe</label>
             <select id="location" name="location" required>
-              <option value="Cafe 1, streetname, ON, A1B 2C3">Cafe 1, Streetname, ON, A1B 2C3</option>
-              <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, Roadname, ON, D4E 5F6</option>
-              <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, Avenuename, ON, G7H 8I9</option>
+              <option value="Cafe 1, streetname, ON, A1B 2C3">Cafe 1, 333 Queen St , ON, A1B 2C3</option>
+              <option value="Cafe 2, roadname, ON, D4E 5F6">Cafe 2, 346 King St, ON, D4E 5F6</option>
+              <option value="Cafe 3, avenuename, ON, G7H 8I9">Cafe 3, 1121 Younge St, ON, G7H 8I9</option>
             </select>
           </div>
         </div>
         <div class="col-sm-5">
           <div class="form-group">
-            <label>How many People *</label>
-            <input type="number" min="0" class="form-control" required id="people" name="people">
+            <label>How many People (Max 25) *</label>
+            <input type="number" min="0" max="25" class="form-control" required id="people" name="people">
           </div>
           <div class="form-group">
             <label>Additional Notes</label>
             <textarea name="message" id="message" name="message" class="form-control" rows="8"></textarea>
           </div>
           <div class="form-group">
-            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit Booking</button>
+            <button type="submit" name="submit" class="btn btn-primary btn-lg"  required="required">Submit Booking</button>
           </div>
         </div>
       </form>
